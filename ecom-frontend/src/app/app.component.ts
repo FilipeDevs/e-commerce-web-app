@@ -1,18 +1,19 @@
 import {Component, OnInit, inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
-  FaConfig,
+  FaConfig, FaIconComponent,
   FaIconLibrary,
 } from '@fortawesome/angular-fontawesome';
 import { fontAwesomeIcons } from './shared/font-awesome-icons';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {Oauth2Service} from './auth/oauth2.service';
-import {isPlatformBrowser} from '@angular/common';
+import {isPlatformBrowser, NgClass} from '@angular/common';
+import { ToastService } from './shared/toast/toast.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, FaIconComponent, NgClass],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -24,6 +25,8 @@ export class AppComponent implements OnInit {
 
   platformId =  inject(PLATFORM_ID);
 
+  toastService = inject(ToastService);
+
   constructor() {
     if(isPlatformBrowser(this.platformId)) {
       this.oauth2Service.initAuthentication();
@@ -34,6 +37,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFontAwesome();
+    this.toastService.show('Welcome to the app!', 'SUCCESS');
   }
 
 

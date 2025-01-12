@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Oauth2Service } from '../../auth/oauth2.service';
 import {data} from 'autoprefixer';
+import {ClickOutside} from 'ngxtension/click-outside';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, FaIconComponent],
+  imports: [CommonModule, RouterLink, FaIconComponent, ClickOutside],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
