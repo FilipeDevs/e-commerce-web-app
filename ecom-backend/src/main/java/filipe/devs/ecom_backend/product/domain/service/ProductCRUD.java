@@ -7,6 +7,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+import java.util.Optional;
+
 
 public class ProductCRUD {
 
@@ -31,6 +34,10 @@ public class ProductCRUD {
       throw new EntityNotFoundException(String.format("No Product deleted with id %s", id));
     }
     return id;
+  }
+
+  public Optional<Product> findOne(PublicId publicId) {
+    return productRepository.findOne(publicId);
   }
 
 }

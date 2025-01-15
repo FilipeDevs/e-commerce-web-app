@@ -1,6 +1,7 @@
 package filipe.devs.ecom_backend.product.infrastructure.secondary.repository;
 
 
+import filipe.devs.ecom_backend.product.domain.aggregate.FilterQuery;
 import filipe.devs.ecom_backend.product.domain.aggregate.Picture;
 import filipe.devs.ecom_backend.product.domain.aggregate.Product;
 import filipe.devs.ecom_backend.product.domain.repository.ProductRepository;
@@ -65,6 +66,28 @@ public class SpringDataProductRepository implements ProductRepository {
   @Override
   public int delete(PublicId publicId) {
     return jpaProductRepository.deleteByPublicId(publicId.value());
+  }
+
+  @Override
+  public Page<Product> findAllFeaturedProduct(Pageable pageable) {
+    return jpaProductRepository.findAllByFeaturedTrue(pageable).map(ProductEntity::to);
+  }
+
+  @Override
+  public Optional<Product> findOne(PublicId publicId) {
+    return jpaProductRepository.findByPublicId(publicId.value()).map(ProductEntity::to);
+  }
+
+  @Override
+  public Page<Product> findByCategoryExcludingOne(Pageable pageable, PublicId categoryPublicId, PublicId excludedProductPublicId) {
+    return jpaProductRepository.findByCategoryPublicIdAndPublicIdNot(pageable, categoryPublicId.value(),
+            excludedProductPublicId.value()).map(ProductEntity::to);
+  }
+
+  @Override
+  public Page<Product> findByCategoryAndSize(Pageable pageable, FilterQuery filterQuery) {
+    return jpaProductRepository.findByCategoryPublicIdAndSizesIn(pageable, filterQuery.categoryPublicId().value(),
+            filterQuery.sizes()).map(ProductEntity::to);
   }
 
 }
