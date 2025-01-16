@@ -1,6 +1,7 @@
 export type OrderStatus = 'PENDING' | 'PAID';
 
 export interface OrderedItems {
+  publicProductId : string;
   name: string;
   quantity: number;
   price: number

@@ -6,10 +6,11 @@ import {injectQuery} from '@tanstack/angular-query-experimental';
 import {lastValueFrom} from 'rxjs';
 import {OrderedItems} from '../../shared/model/order.model';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-user-orders',
-  imports: [CommonModule, FaIconComponent],
+  imports: [CommonModule, FaIconComponent, RouterLink],
   templateUrl: './user-orders.component.html',
   styleUrl: './user-orders.component.scss'
 })

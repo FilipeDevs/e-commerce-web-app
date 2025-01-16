@@ -21,7 +21,13 @@
         @for(order of ordersQuery.data().content!; track order.publicId; let i = $index) {
           <tr class="border-t-1 border-gray-300">
             <th>{{i}}</th>
-            <td>{{computeItemsName(order.orderedItems)}}</td>
+            <td>
+              @for (item of order.orderedItems; track item.publicProductId) {
+                <a [routerLink]="['/product', item.publicProductId]" class="text-blue-500 hover:underline">
+                  {{ item.name }}
+                </a>{{ !$last ? ', ' : '' }}
+              }
+            </td>
             <td>{{order.status}}</td>
             <td>{{computeItemsQuantity(order.orderedItems)}}</td>
             <td>{{computeTotal(order.orderedItems) | currency}}</td>
