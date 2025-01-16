@@ -34,4 +34,5 @@ public interface JpaProductRepository  extends JpaRepository<ProductEntity, Long
     "WHERE product.publicId = :productPublicId")
   void updateQuantity(UUID productPublicId, long quantity);
 
+
 }

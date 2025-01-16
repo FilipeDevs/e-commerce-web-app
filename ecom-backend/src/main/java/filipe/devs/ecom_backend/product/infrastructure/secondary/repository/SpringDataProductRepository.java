@@ -1,6 +1,7 @@
 package filipe.devs.ecom_backend.product.infrastructure.secondary.repository;
 
 
+import filipe.devs.ecom_backend.order.domain.order.vo.ProductPublicId;
 import filipe.devs.ecom_backend.product.domain.aggregate.FilterQuery;
 import filipe.devs.ecom_backend.product.domain.aggregate.Picture;
 import filipe.devs.ecom_backend.product.domain.aggregate.Product;
@@ -95,6 +96,11 @@ public class SpringDataProductRepository implements ProductRepository {
   public List<Product> findByPublicIds(List<PublicId> publicIds) {
     List<UUID> publicIdsUUIDs = publicIds.stream().map(PublicId::value).toList();
     return jpaProductRepository.findAllByPublicIdIn(publicIdsUUIDs).stream().map(ProductEntity::to).toList();
+  }
+
+  @Override
+  public void updateQuantity(ProductPublicId productPublicId, long quantity) {
+    jpaProductRepository.updateQuantity(productPublicId.value(), quantity);
   }
 
 }

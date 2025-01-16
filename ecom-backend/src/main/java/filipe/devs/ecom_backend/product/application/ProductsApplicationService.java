@@ -1,6 +1,7 @@
 package filipe.devs.ecom_backend.product.application;
 
 
+import filipe.devs.ecom_backend.order.domain.order.aggregate.OrderProductQuantity;
 import filipe.devs.ecom_backend.product.domain.aggregate.Category;
 import filipe.devs.ecom_backend.product.domain.aggregate.FilterQuery;
 import filipe.devs.ecom_backend.product.domain.aggregate.Product;
@@ -9,6 +10,7 @@ import filipe.devs.ecom_backend.product.domain.repository.ProductRepository;
 import filipe.devs.ecom_backend.product.domain.service.CategoryCRUD;
 import filipe.devs.ecom_backend.product.domain.service.ProductCRUD;
 import filipe.devs.ecom_backend.product.domain.service.ProductShop;
+import filipe.devs.ecom_backend.product.domain.service.ProductUpdater;
 import filipe.devs.ecom_backend.product.domain.vo.PublicId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,15 +25,15 @@ import java.util.Optional;
 public class ProductsApplicationService {
 
   private ProductCRUD productCRUD;
-
   private CategoryCRUD categoryCRUD;
-
   private ProductShop productShop;
+  private ProductUpdater productUpdater;
 
   public ProductsApplicationService(ProductRepository productRepository, CategoryRepository categoryRepository) {
     this.productCRUD = new ProductCRUD(productRepository);
     this.categoryCRUD = new CategoryCRUD(categoryRepository);
     this.productShop = new ProductShop(productRepository);
+    this.productUpdater = new ProductUpdater(productRepository);
   }
 
   @Transactional
@@ -89,4 +91,8 @@ public class ProductsApplicationService {
     return productCRUD.findAllByPublicIdIn(publicIds);
   }
 
+  @Transactional
+  public void updateProductQuantity(List<OrderProductQuantity> orderProductQuantities) {
+    productUpdater.updateProductQuantity(orderProductQuantities);
+  }
 }

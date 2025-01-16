@@ -1,5 +1,6 @@
 package filipe.devs.ecom_backend.product.domain.repository;
 
+import filipe.devs.ecom_backend.order.domain.order.vo.ProductPublicId;
 import filipe.devs.ecom_backend.product.domain.aggregate.FilterQuery;
 import filipe.devs.ecom_backend.product.domain.aggregate.Product;
 import filipe.devs.ecom_backend.product.domain.vo.PublicId;
@@ -27,5 +28,7 @@ public interface ProductRepository {
   Page<Product> findByCategoryAndSize(Pageable pageable, FilterQuery filterQuery);
 
   List<Product> findByPublicIds(List<PublicId> publicIds);
+
+  void updateQuantity(ProductPublicId productPublicId, long quantity);
 
 }

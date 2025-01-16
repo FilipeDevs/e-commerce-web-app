@@ -83,6 +83,6 @@ application:
     client-id: ${KINDE_CLIENT_ID}
     client-secret: ${KINDE_CLIENT_SECRET}
     audience: https://filipedevs.kinde.com/api
-#  stripe:
-#    api-key: ${STRIPE_API_KEY}
-#    webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+  stripe:
+    api-key: ${STRIPE_API_KEY}
+    webhook-secret: ${STRIPE_WEBHOOK_SECRET}
