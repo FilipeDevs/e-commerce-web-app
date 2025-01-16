@@ -15,6 +15,7 @@
         <th>Status</th>
         <th>Nb of items</th>
         <th>Total amount</th>
+        <th>Details</th>
       </tr>
       </thead>
       <tbody class="border-0">
@@ -31,6 +32,40 @@
             <td>{{order.status}}</td>
             <td>{{computeItemsQuantity(order.orderedItems)}}</td>
             <td>{{computeTotal(order.orderedItems) | currency}}</td>
+            <td>
+              <button class="btn" (click)="myModal.showModal()">View Details</button>
+              <dialog #myModal class="modal modal-bottom sm:modal-middle">
+                <div class="modal-box">
+                  <h1 class="font-bold">Order Details</h1>
+                  <div class="flex flex-col">
+                    <div class="flex justify-between">
+                      <span>Order ID:</span>
+                      <span class="text-sm font-bold underline">{{order.publicId}}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Ordered Items:</span>
+                      <span class="font-bold">{{computeItemsQuantity(order.orderedItems)}}</span>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <span class="font-bold">Ordered Products:</span>
+                      <div class="mt-2">
+                        @for (item of order.orderedItems; track item.publicProductId) {
+                          <div class="flex justify-between items-center mb-2">
+                            <a [routerLink]="['/product', item.publicProductId]" class="text-blue-500 hover:underline">
+                              {{ item.name }}
+                            </a>
+                            <span class="font-bold">{{item.quantity}}</span>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-action">
+                    <button class="btn" (click)="myModal.close()">Close</button>
+                  </div>
+                </div>
+              </dialog>
+            </td>
           </tr>
         }
       </tbody>
