@@ -10,7 +10,7 @@ import { Pagination } from '../../shared/model/request.model';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { filter, lastValueFrom } from 'rxjs';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import {UserProductService} from '../../shared/user/user-product.service';
+import {UserProductService} from '../../shared/service/user/user-product.service';
 
 @Component({
   selector: 'app-products',

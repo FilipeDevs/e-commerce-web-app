@@ -112,6 +112,34 @@ export class CartService {
     return cart;
   }
 
+  initPaymentSession(cart: Array<CartItemAdd>): Observable<StripeSession> {
+    return this.http.post<StripeSession>(
+      `${environment.apiUrl}/orders/init-payment`,
+      cart
+    );
+  }
+
+  storeSessionId(sessionId: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.keySessionId, sessionId);
+    }
+  }
+
+  getSessionId(): string {
+    if (isPlatformBrowser(this.platformId)) {
+      const stripeSessionId = localStorage.getItem(this.keySessionId);
+      if (stripeSessionId) {
+        return stripeSessionId;
+      }
+    }
+    return '';
+  }
+
+  deleteSessionId(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.keySessionId);
+    }
+  }
 
   clearCart() {
     if (isPlatformBrowser(this.platformId)) {

@@ -1,6 +1,6 @@
 import {Component, effect, inject} from '@angular/core';
 import {injectParams} from 'ngxtension/inject-params';
-import {UserProductService} from '../../shared/user/user-product.service';
+import {UserProductService} from '../../shared/service/user/user-product.service';
 import {ToastService} from '../../shared/toast/toast.service';
 import {Router} from '@angular/router';
 import {Pagination} from '../../shared/model/request.model';

@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Pagination} from '../../shared/model/request.model';
-import {UserProductService} from '../../shared/user/user-product.service';
+import {UserProductService} from '../../shared/service/user/user-product.service';
 import {injectQuery} from '@tanstack/angular-query-experimental';
 import {lastValueFrom} from 'rxjs';
 import {ProductCardComponent} from '../../shop/product-card/product-card.component';

@@ -5,7 +5,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { Oauth2Service } from '../../auth/oauth2.service';
 import {data} from 'autoprefixer';
 import {ClickOutside} from 'ngxtension/click-outside';
-import {UserProductService} from '../../shared/user/user-product.service';
+import {UserProductService} from '../../shared/service/user/user-product.service';
 import {injectQuery} from '@tanstack/angular-query-experimental';
 import {lastValueFrom} from 'rxjs';
 import {CartService} from '../../shop/cart.service';
