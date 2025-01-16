@@ -8,6 +8,7 @@ import {ClickOutside} from 'ngxtension/click-outside';
 import {UserProductService} from '../../shared/user/user-product.service';
 import {injectQuery} from '@tanstack/angular-query-experimental';
 import {lastValueFrom} from 'rxjs';
+import {CartService} from '../../shop/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,9 @@ export class NavbarComponent implements OnInit {
 
   oauth2Service = inject(Oauth2Service);
   productService = inject(UserProductService);
+  cartService = inject(CartService);
+
+  nbItemsInCart = 0;
 
   connectedUserQuery = this.oauth2Service.connectedUserQuery;
 
@@ -57,7 +61,16 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listenToCart();
+  }
 
+  private listenToCart() {
+    this.cartService.addedToCart.subscribe((productsInCart) => {
+      this.nbItemsInCart = productsInCart.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
+    });
   }
 
   protected readonly data = data;
