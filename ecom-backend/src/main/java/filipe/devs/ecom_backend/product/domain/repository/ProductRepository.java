@@ -6,6 +6,7 @@ import filipe.devs.ecom_backend.product.domain.vo.PublicId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -24,5 +25,7 @@ public interface ProductRepository {
   Page<Product> findByCategoryExcludingOne(Pageable pageable, PublicId categoryPublicId, PublicId excludedProductPublicId);
 
   Page<Product> findByCategoryAndSize(Pageable pageable, FilterQuery filterQuery);
+
+  List<Product> findByPublicIds(List<PublicId> publicIds);
 
 }

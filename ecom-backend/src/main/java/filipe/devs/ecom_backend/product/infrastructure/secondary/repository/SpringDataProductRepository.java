@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @Repository
 public class SpringDataProductRepository implements ProductRepository {
@@ -88,6 +89,12 @@ public class SpringDataProductRepository implements ProductRepository {
   public Page<Product> findByCategoryAndSize(Pageable pageable, FilterQuery filterQuery) {
     return jpaProductRepository.findByCategoryPublicIdAndSizesIn(pageable, filterQuery.categoryPublicId().value(),
             filterQuery.sizes()).map(ProductEntity::to);
+  }
+
+  @Override
+  public List<Product> findByPublicIds(List<PublicId> publicIds) {
+    List<UUID> publicIdsUUIDs = publicIds.stream().map(PublicId::value).toList();
+    return jpaProductRepository.findAllByPublicIdIn(publicIdsUUIDs).stream().map(ProductEntity::to).toList();
   }
 
 }

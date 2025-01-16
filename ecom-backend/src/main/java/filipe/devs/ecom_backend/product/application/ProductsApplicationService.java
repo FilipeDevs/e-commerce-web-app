@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -81,6 +82,11 @@ public class ProductsApplicationService {
   @Transactional(readOnly = true)
   public Page<Product> filter(Pageable pageable, FilterQuery filterQuery) {
         return productShop.filter(pageable, filterQuery);
-    }
+  }
+
+  @Transactional(readOnly = true)
+  public List<Product> getProductsByPublicIdsIn(List<PublicId> publicIds) {
+    return productCRUD.findAllByPublicIdIn(publicIds);
+  }
 
 }

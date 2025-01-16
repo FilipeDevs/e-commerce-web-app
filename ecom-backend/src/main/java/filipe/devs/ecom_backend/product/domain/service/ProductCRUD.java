@@ -40,4 +40,8 @@ public class ProductCRUD {
     return productRepository.findOne(publicId);
   }
 
+  public List<Product> findAllByPublicIdIn(List<PublicId> publicIds) {
+    return productRepository.findByPublicIds(publicIds);
+  }
+
 }
