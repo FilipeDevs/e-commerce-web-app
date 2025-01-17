@@ -1,6 +1,6 @@
 <a class="flex justify-start cursor-pointer" [routerLink]="['/product', product().publicId]">
   <div class="flex flex-col justify-center rounded-xl w-full min-h-[400px] h-full shadow-xl">
-    <figure class="flex justify-center items-center h-full">
+    <figure class="flex justify-center items-center h-full p-2">
       <img [src]="'data:' + product().pictures[0].mimeType + ';base64,' + product().pictures[0].file"
            alt="{{product().name}}" width="250px"/>
     </figure>
